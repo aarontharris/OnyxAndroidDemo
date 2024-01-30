@@ -1,26 +1,25 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 33
     dataBinding {
         enabled = true
     }
     defaultConfig {
         applicationId "com.android.onyx.demo"
-        minSdkVersion 23
-        targetSdkVersion 30
+        minSdkVersion 26
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-                arguments=['targetModuleName':'Scribble']
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                includeCompileClasspath = true
+//                arguments=['targetModuleName':'Scribble']
+//            }
+//        }
 
         ndk {
             abiFilters "armeabi-v7a"
@@ -32,25 +31,29 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
-    lintOptions {
-        abortOnError false
-    }
-
     packagingOptions {
-        pickFirst 'lib/*/libc++_shared.so'
-        pickFirst 'androidsupportmultidexversion.txt'
+        jniLibs {
+            pickFirsts += ['lib/*/libc++_shared.so']
+        }
+        resources {
+            pickFirsts += ['androidsupportmultidexversion.txt']
+        }
     }
+
 
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    namespace 'com.onyx.android.demo'
+    lint {
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    // implementation 'com.android.support:appcompat-v7:33.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
