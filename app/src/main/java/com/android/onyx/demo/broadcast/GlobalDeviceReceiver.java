@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 
 import com.onyx.android.sdk.utils.BroadcastHelper;
 import com.onyx.android.sdk.utils.DeviceReceiver;
@@ -42,8 +43,10 @@ public class GlobalDeviceReceiver extends BroadcastReceiver {
         try {
             if (enable) {
                 BroadcastHelper.ensureRegisterReceiver(context, this, intentFilter());
+                Log.d("Onyx", "broadcast.enable");
             } else {
                 BroadcastHelper.ensureUnregisterReceiver(context, this);
+                Log.d("Onyx", "broadcast.disable");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,6 +86,7 @@ public class GlobalDeviceReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
+        Log.d("Onyx", "broadcast.onReceive " + action);
         if (action == null) {
             return;
         }

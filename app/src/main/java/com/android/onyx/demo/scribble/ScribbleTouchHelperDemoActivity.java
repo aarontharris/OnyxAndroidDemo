@@ -136,7 +136,7 @@ public class ScribbleTouchHelperDemoActivity extends AppCompatActivity {
                 touchHelper.setStrokeWidth(STROKE_WIDTH)
                         .setLimitRect(limit, exclude)
                         .openRawDrawing();
-                touchHelper.setStrokeStyle(TouchHelper.STROKE_STYLE_BRUSH);
+                touchHelper.setStrokeStyle(TouchHelper.STROKE_STYLE_FOUNTAIN);
                 binding.rbBrush.setChecked(true);
                 binding.surfaceview.addOnLayoutChangeListener(this);
             }
@@ -213,7 +213,7 @@ public class ScribbleTouchHelperDemoActivity extends AppCompatActivity {
         switch (radioButton.getId()) {
             case R.id.rb_brush:
                 if (checked) {
-                    touchHelper.setStrokeStyle(TouchHelper.STROKE_STYLE_BRUSH);
+                    touchHelper.setStrokeStyle(TouchHelper.STROKE_STYLE_FOUNTAIN);
                     Log.d(TAG, "STROKE_STYLE_BRUSH");
                 }
                 break;
